@@ -85,10 +85,9 @@ public class Anagram {
 		String firstPart = str.substring(0, pos);
 		String secondPart = str.substring(pos + 1, str.length());
 		if (rand > 0.5){
-			return firstPart + " "+ secondPart + c;
+			return firstPart + secondPart + c;
 		}else{
-			return c + firstPart +" "+ secondPart;
+			return c + firstPart + secondPart;
 		}
 	}
 }
- 
