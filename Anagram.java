@@ -79,15 +79,22 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		// Replace the following statement with your code
+		String result = "";
 		double rand = Math.random();
 		int pos = (int)(rand * str.length());
 		char c = str.charAt(pos);
-		String firstPart = str.substring(0, pos);
-		String secondPart = str.substring(pos + 1, str.length());
-		if (rand > 0.5){
-			return firstPart + secondPart + c;
-		}else{
-			return c + firstPart + secondPart;
+		for (int i = 0; i < pos + 1; i++){
+			String firstPart = str.substring(0, pos);
+			String secondPart = str.substring(pos + 1, str.length());
+			if (rand > 0.5){
+				result = firstPart + secondPart + c;
+			}else{
+				result = c + firstPart + secondPart;
+			}
+			c = str.charAt(pos);
+			pos = (int)(rand * str.length());
+			rand = Math.random();
 		}
+		return result;
 	}
 }
