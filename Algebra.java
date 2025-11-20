@@ -25,24 +25,26 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		if (x2 > 0){
+		if (x2 >= 0){
 			for (int i = 0; i < x2; i++) {
 				x1++;
 			}
 			return x1;
 		} else {
+			// if (x) + (-x)
 			return minus(x1, -x2);
 		}
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		if (x2 < 0){
+		if (x2 > 0){
 			for (int i = 0; i < x2; i++) {
 				x1--;
 			}
 			return x1;
 		} else {
+			// if (x) - (-x)
 			return plus(x1, -x2);
 		}
 	}
@@ -50,6 +52,13 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int result = 0;
+
+		if (x1 == 0 || x2 == 0){
+			return 0;
+		} else if (x1 < 0 && x2 < 0){
+			x1 = -x1;
+			x2 = -x2;
+		}
 		for (int i = 0; i < x2; i++) {
 			result = plus(result, x1);
 		}
@@ -59,21 +68,38 @@ public class Algebra {
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		int result = 1;
+		int negative = 1;
+		if (x < 0 && n % 2 == 0){
+			x = -x;
+		} else if (x < 0){
+			x = -x;
+			negative = -1;
+		}
 		for (int i = 0; i < n; i++) {
 			result = times(result, x);	
 		}
-		return result;
+		return negative * result;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int quotient = 0;
 		int product = 0;
-		while (plus(product, x2) <= x1) {
+		if (x1 == 0){
+			return 0;
+		}else if (x1 < 0 && x2 < 0){
+			x1 = -x1;
+			x2 = -x2;
+		}
+		while (plus(product, x2) <= Math.abs(x1)) {
 			product = plus(product, x2);
 			quotient = plus(quotient, 1);
 		}
-		return quotient;
+		if (x1 < 0 || x2 < 0){
+			return -quotient;
+		} else {
+			return quotient;
+		}
 	}
 
 	// Returns x1 % x2
@@ -84,15 +110,19 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 	if (x== 0){
-		return -1;
+		return 0;
+	} else if (x == 1) {
+		return 1;
 	}
 	int low = 0; 
 	int high = x;
 	int ans = 0;
+	int mid;
+	int square;
 	// Binary search for the integer part of sqrt(x)
     while (low <= high) {
-        int mid = div(plus(low, high), 2);
-        int square = times(mid, mid);
+        mid = div(plus(low, high), 2);
+        square = times(mid, mid);
         if (square == x) {
             return mid;
         } else if (square < x) {
