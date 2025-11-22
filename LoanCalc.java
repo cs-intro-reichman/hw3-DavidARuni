@@ -63,10 +63,6 @@ public class LoanCalc {
 				return lastPayment;
 			}
 
-			if (payment >= 2877.83 ){
-				System.out.println("");
-			}
-
 		}
 
 		// If we never met the condition, return 0 as the assignment probably expects
