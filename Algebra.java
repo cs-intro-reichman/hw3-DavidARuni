@@ -25,43 +25,119 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x2 >= 0){
+			for (int i = 0; i < x2; i++) {
+				x1++;
+			}
+			return x1;
+		} else {
+			// if (x) + (-x)
+			return minus(x1, -x2);
+		}
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x2 > 0){
+			for (int i = 0; i < x2; i++) {
+				x1--;
+			}
+			return x1;
+		} else {
+			// if (x) - (-x)
+			return plus(x1, -x2);
+		}
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int result = 0;
+		// Mulyiply by Zero
+		if (x1 == 0 || x2 == 0){
+			return 0;
+		// Negative * Negative
+		} else if (x1 < 0 && x2 < 0){
+			x1 = -x1;
+			x2 = -x2;
+		}
+		for (int i = 0; i < x2; i++) {
+			result = plus(result, x1);
+		}
+		return result;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int result = 1;
+		int negative = 1;
+		// Even power
+		if (x < 0 && n % 2 == 0){
+			x = -x;
+		} else if (x < 0){
+			x = -x;
+			negative = -1;
+		}
+		for (int i = 0; i < n; i++) {
+			result = times(result, x);	
+		}
+		return negative * result;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int quotient = 0;
+		int product = 0;
+
+		// Dividing Zero
+		if (x1 == 0){
+			return 0;
+		// Negative * Negative
+		}else if (x1 < 0 && x2 < 0){
+			x1 = -x1;
+			x2 = -x2;
+		}
+		while (plus(product, x2) <= Math.abs(x1)) {
+			product = plus(product, x2);
+			quotient = plus(quotient, 1);
+		}
+		// If one is Negative (where both was delt with at L:93)
+		if (x1 < 0 || x2 < 0){
+			return -quotient;
+		} else {
+			return quotient;
+		}
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		return minus(x1, times(div(x1, x2), x2));
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
+	if (x== 0){
 		return 0;
+	} else if (x == 1) {
+		return 1;
+	}
+	int low = 0; 
+	int high = x;
+	int ans = 0;
+	int mid;
+	int square;
+	// Binary search for the integer part of sqrt(x)
+    while (low <= high) {
+        mid = div(plus(low, high), 2);
+        square = times(mid, mid);
+        if (square == x) {
+            return mid;
+        } else if (square < x) {
+            ans = mid;
+            low = plus(mid, 1);
+        } else {
+            high = minus(mid, 1);
+        }
+    }
+    return ans;
 	}	  	  
 }
