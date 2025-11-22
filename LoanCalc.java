@@ -9,12 +9,9 @@ public class LoanCalc {
     // interest rate (double, as a percentage), and number of payments (int).  
 	public static void main(String[] args) {		
 		// Gets the loan data
-		double loan = 50000.0;
-		double rate = 5.0;
-		int n = 36;
-		// double loan = Double.parseDouble(args[0]);
-		// double rate = Double.parseDouble(args[1]);
-		// int n = Integer.parseInt(args[2]);
+		double loan = Double.parseDouble(args[0]);
+		double rate = Double.parseDouble(args[1]);
+		int n = Integer.parseInt(args[2]);
 		System.out.println("Loan = " + loan + ", interest rate = " + rate + "%, periods = " + n);
 
 		// Computes the periodical payment using brute force search
