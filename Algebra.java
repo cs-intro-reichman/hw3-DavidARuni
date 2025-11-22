@@ -52,9 +52,10 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int result = 0;
-
+		// Mulyiply by Zero
 		if (x1 == 0 || x2 == 0){
 			return 0;
+		// Negative * Negative
 		} else if (x1 < 0 && x2 < 0){
 			x1 = -x1;
 			x2 = -x2;
@@ -69,6 +70,7 @@ public class Algebra {
 	public static int pow(int x, int n) {
 		int result = 1;
 		int negative = 1;
+		// Even power
 		if (x < 0 && n % 2 == 0){
 			x = -x;
 		} else if (x < 0){
@@ -85,8 +87,11 @@ public class Algebra {
 	public static int div(int x1, int x2) {
 		int quotient = 0;
 		int product = 0;
+
+		// Dividing Zero
 		if (x1 == 0){
 			return 0;
+		// Negative * Negative
 		}else if (x1 < 0 && x2 < 0){
 			x1 = -x1;
 			x2 = -x2;
@@ -95,6 +100,7 @@ public class Algebra {
 			product = plus(product, x2);
 			quotient = plus(quotient, 1);
 		}
+		// If one is Negative (where both was delt with at L:93)
 		if (x1 < 0 || x2 < 0){
 			return -quotient;
 		} else {
